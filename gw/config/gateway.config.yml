@@ -1,0 +1,61 @@
+http:
+  port: 3000
+admin:
+  port: 9876
+  host: localhost
+apiEndpoints:
+  products:
+    host: localhost
+    paths: '/api/products'
+    methods: ["GET", "POST", "PUT", "DELETE"]
+  employee:
+    host: localhost
+    paths: '/api/employees'
+    methods: ["GET", "POST", "PUT", "DELETE"]
+  users:
+    host: localhost
+    paths: '/api/users'
+    methods: ["GET", "POST", "PUT", "DELETE"]
+serviceEndpoints:
+  product:
+    url: 'http://localhost:7010'
+  employee:
+    url: 'http://localhost:7020'
+  user:
+    url: 'http://localhost:7030'
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+pipelines:
+  - name: product
+    apiEndpoints:
+      - product
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    # - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: product
+              changeOrigin: true
+  - name: employee
+    apiEndpoints:
+      - employee
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: employee 
+              changeOrigin: true
+  - name: user
+    apiEndpoints:
+      - user
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: user
+              changeOrigin: true

@@ -1,0 +1,14 @@
+{
+  "name": "express-gateway-first-app",
+  "description": "Express Gateway Instance Bootstraped from Command Line",
+  "repository": {},
+  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts" : {
+    "start": "pm2 start ./server.js --name gateway"
+  },
+  "dependencies": {
+    "express-gateway": "^1.16.11"
+  }
+}
