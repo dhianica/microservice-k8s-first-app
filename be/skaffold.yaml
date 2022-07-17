@@ -11,4 +11,8 @@ build:
   - image: florist-be-products-img-dev
     context: service/products
     docker:
+      dockerfile: Dockerfile.dev      
+  - image: florist-be-employee-img-dev
+    context: service/employee
+    docker:
       dockerfile: Dockerfile.dev

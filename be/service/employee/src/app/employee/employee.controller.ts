@@ -4,9 +4,9 @@ import * as express from 'express';
 class EmployeeController {
   private posts: any[] = [
     {
-      name: 'Marcin',
-      author: 'Dolor sit amet',
-      title: 'Lorem Ipsum'
+      name: 'Muchammad Ilham',
+      division: 'System Development',
+      title: 'Senior'
     }
   ];
   getAllEmployees = (

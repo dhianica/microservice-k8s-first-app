@@ -9,6 +9,13 @@ spec:
     - host: localhost
       http:
         paths:
+          - path: /api/employee
+            pathType: Prefix
+            backend:
+              service:
+                name: florist-be-employee-svc-dev
+                port: 
+                  number: 80
           - path: /api/products
             pathType: Prefix
             backend:
