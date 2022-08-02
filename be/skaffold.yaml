@@ -12,3 +12,7 @@ build:
     context: service/products
     docker:
       dockerfile: Dockerfile.dev
+  - image: florist-be-employee-img-dev
+    context: service/employee
+    docker:
+      dockerfile: Dockerfile.dev

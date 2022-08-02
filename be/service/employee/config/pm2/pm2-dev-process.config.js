@@ -3,7 +3,7 @@ module.exports = {
     {
       ...require('./pm2.config'),
       env: {
-        'PORT': 7010,
+        'PORT': 7030,
         'NODE_ENV': 'development'
       }
     }

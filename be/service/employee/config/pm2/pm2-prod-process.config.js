@@ -6,7 +6,7 @@ module.exports = {
       instances: 2, // can be max or any number of process across cpu
       exec_mode: 'cluster',
       env: {
-        'PORT': 6010,
+        'PORT': 6030,
         'NODE_ENV': 'production'
       }
     }

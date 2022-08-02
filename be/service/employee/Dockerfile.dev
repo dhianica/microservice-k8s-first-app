@@ -1,5 +1,5 @@
 FROM node:14-alpine
-EXPOSE 7020
+EXPOSE 7030
 WORKDIR /app
 COPY ./package.json ./
 ENV CI=true
