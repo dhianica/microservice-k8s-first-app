@@ -1,7 +1,0 @@
-version: '3.7'
-services:
-  florist-be-product-dev:
-    image: florist-be-product-dev
-    ports:
-      - 7020:7021
-    container_name: florist-be

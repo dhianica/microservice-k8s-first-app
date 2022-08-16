@@ -9,28 +9,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const {
   NODE_ENV = 'production',
   NODE_PUBLISH = 'false',
-  NODE_DOCKER = 'false',
-  NODE_PM2 = 'false',
+  NODE_DOCKER = 'false'
 } = process.env;
-
-const nextScript = () => {
-  if (NODE_PUBLISH === 'true') return ['yarn run:publish']
-  else {
-    switch (NODE_ENV) {
-      case 'development':
-        if (NODE_PM2 === 'false' && NODE_DOCKER === 'false') return ['yarn run:dev']
-        else if (NODE_PM2 === 'true' && NODE_DOCKER === 'false') return ['yarn run:pm2-dev']
-        else if (NODE_PM2 === 'false' && NODE_DOCKER === 'true') return ['yarn run:docker-dev']
-        break;
-      case 'production':
-        if (NODE_PM2 === 'false' && NODE_DOCKER === 'false') return ['yarn run:prod']
-        else if (NODE_PM2 === 'true' && NODE_DOCKER === 'false') return ['yarn run:pm2-prod']
-        else if (NODE_PM2 === 'false' && NODE_DOCKER === 'true') return ['yarn run:docker-prod']
-        break;
-      default: return ['yarn run:dev']
-    }
-  }
-}
 
 module.exports = {
   entry: './src/bin/www.ts',
@@ -60,7 +40,12 @@ module.exports = {
     new ForkTsCheckerWebpackPlugin(),
     new WebpackShellPlugin({
       onBuildEnd: {
-        scripts: nextScript()
+        scripts: 
+        (NODE_PUBLISH === 'true') ? ['yarn run:publish'] :
+        (NODE_ENV === 'development' && NODE_DOCKER === 'false') ? ['yarn run:dev'] : 
+        (NODE_ENV === 'production' && NODE_DOCKER === 'false') ? ['yarn run:prod'] :
+        (NODE_ENV === 'development' && NODE_DOCKER === 'true') ? ['yarn run:docker-dev'] :
+        (NODE_ENV === 'production' && NODE_DOCKER === 'true') ? ['yarn run:docker-prod'] : ['yarn run:dev']
       }
     })
   ],

@@ -1,0 +1,39 @@
+---
+#
+# Redis deployment
+#
+# For local development only!
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: florist-server-redis-depl-dev
+  labels:
+    app: florist
+    service: florist-server-redis-depl-dev
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+      name: florist-server-redis-depl-dev
+  selector:
+    service: florist-server-redis-depl-dev
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: florist-server-redis-depl-dev
+spec:
+  selector:
+    matchLabels:
+      service: florist-server-redis-depl-dev
+  template:
+    metadata:
+      labels:
+        service: florist-server-redis-depl-dev
+    spec:
+      containers:
+        - name: redis-dev
+          image: quay.io/testing-farm/redis:alpine
+          ports:
+            - containerPort: 6379

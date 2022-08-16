@@ -1,0 +1,19 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  artifacts:
+    - image: florist-server
+      docker:
+        dockerfile: container/Dockerfile
+
+  # by default to not push to remote repository
+  local:
+    push: false
+
+  # tag images by date and time
+  tagPolicy:
+    dateTime: {}

@@ -1,0 +1,66 @@
+---
+#
+# RabbitMQ
+#
+# For local development only!
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: florist-server-rabbitmq-depl-dev
+  labels:
+    app: florist
+    service: florist-server-rabbitmq-depl-dev
+spec:
+  ports:
+    - port: 5672
+      targetPort: 5672
+      name: florist-server-rabbitmq-depl-dev
+  selector:
+    service: florist-server-rabbitmq-depl-dev
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: florist-server-rabbitmq-management-depl-dev 
+  labels:
+    app: florist
+    service: florist-server-rabbitmq-depl-dev
+spec:
+  ports:
+    - port: 80
+      targetPort: 15672
+      name: florist-server-rabbitmq-depl-dev
+  selector:
+    service: florist-server-rabbitmq-depl-dev
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: florist-server-rabbitmq-management-depl-dev 
+spec:
+  to:
+    kind: Service
+    name: florist-server-rabbitmq-management-depl-dev 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: florist-server-rabbitmq-depl-dev
+spec:
+  selector:
+    matchLabels:
+      service: florist-server-rabbitmq-depl-dev
+  template:
+    metadata:
+      labels:
+        app: florist
+        service: florist-server-rabbitmq-depl-dev
+    spec:
+      containers:
+        - name: rabbitmq-dev
+          image: rabbitmq:3.10-management
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+
