@@ -16,12 +16,14 @@ module.exports = {
     'browser': true,
     'node': true
   },
-  'parser': '@typescript-eslint/parser',
-  'plugins': ['sonarjs', '@typescript-eslint', '@typescript-eslint/tslint'],
+  "parser": "@typescript-eslint/parser",
+  'plugins': ['@typescript-eslint'],
+  "extends": ["plugin:sonarjs/recommended"],
   'root': true,
   'rules': {
     '@typescript-eslint/consistent-type-definitions': 'warn',
     '@typescript-eslint/dot-notation': 'off',
+    "@typescript-eslint/no-explicit-any": "off",
     '@typescript-eslint/explicit-function-return-type': [
       'warn',
       {
@@ -32,12 +34,7 @@ module.exports = {
         'allowConciseArrowFunctionExpressionsStartingWithVoid': true
       }
     ],
-    '@typescript-eslint/explicit-member-accessibility': [
-      'warn',
-      {
-        'accessibility': 'no-public'
-      }
-    ],
+    "@typescript-eslint/explicit-member-accessibility": "off",
     '@typescript-eslint/explicit-module-boundary-types': [
       'warn',
       {
@@ -72,7 +69,7 @@ module.exports = {
       }
     ],
     '@typescript-eslint/no-misused-new': 'warn',
-    '@typescript-eslint/no-non-null-assertion': 'warn',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-shadow': [
       'warn',
       {
@@ -132,7 +129,6 @@ module.exports = {
     'no-fallthrough': 'warn',
     'no-multiple-empty-lines': 'warn',
     'no-new-wrappers': 'warn',
-    'no-restricted-imports': ['warn', 'rxjs'],
     'no-shadow': 'warn',
     'no-throw-literal': 'warn',
     'no-trailing-spaces': 'off',
@@ -160,5 +156,14 @@ module.exports = {
         'markers': ['/']
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts"],
+      "rules": {
+        "@typescript-eslint/explicit-member-accessibility": "error"
+      }
+    }
+  ]
 };

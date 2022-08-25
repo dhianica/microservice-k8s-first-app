@@ -2,11 +2,10 @@ import * as express from 'express';
 import * as glob from 'glob';
 import Utils from '../utils/utils';
 
-
 class Router {
-  router: express.Router;
+  public router: express.Router;
   private path = '/api';
-  constructor() {
+  public constructor() {
     this.router = express.Router();
     this.intializeRoutes();
   }

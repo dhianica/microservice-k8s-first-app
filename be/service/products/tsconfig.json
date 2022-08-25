@@ -6,6 +6,8 @@
         "outDir": "./build/",
         "sourceMap": true,
         "allowJs": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true
     },
     "include": [
         "./src/**/*"

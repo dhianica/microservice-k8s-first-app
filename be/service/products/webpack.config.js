@@ -8,6 +8,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const {
   NODE_ENV = 'production',
+  NODE_LOCAL = 'false',
   NODE_PUBLISH = 'false',
   NODE_DOCKER = 'false'
 } = process.env;
@@ -42,8 +43,10 @@ module.exports = {
       onBuildEnd: {
         scripts: 
         (NODE_PUBLISH === 'true') ? ['yarn run:publish'] :
-        (NODE_ENV === 'development' && NODE_DOCKER === 'false') ? ['yarn run:dev'] : 
-        (NODE_ENV === 'production' && NODE_DOCKER === 'false') ? ['yarn run:prod'] :
+        (NODE_ENV === 'development' && NODE_LOCAL === 'true') ? ['yarn run:dev'] :  
+        (NODE_ENV === 'production' && NODE_LOCAL === 'true') ? ['yarn run:prod'] :
+        (NODE_ENV === 'development' && NODE_DOCKER === 'false') ? ['yarn run:pm2-dev'] : 
+        (NODE_ENV === 'production' && NODE_DOCKER === 'false') ? ['yarn run:pm2-prod'] :
         (NODE_ENV === 'development' && NODE_DOCKER === 'true') ? ['yarn run:docker-dev'] :
         (NODE_ENV === 'production' && NODE_DOCKER === 'true') ? ['yarn run:docker-prod'] : ['yarn run:dev']
       }

@@ -1,4 +1,5 @@
 import * as express from 'express';
+import logger from '../../utils/winston-logger';
 
 class ProductController {
   private posts: any[] = [
