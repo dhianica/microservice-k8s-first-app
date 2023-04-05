@@ -2,7 +2,7 @@
 Starter pack application microservice express, typescript, docker, skaffold, minikube, and k8s
 
 
-Before install it, the first we must setup minikube, skaffold and docker.
+Before run it, the first we must setup minikube, skaffold and docker.
 For the setup you can follow instructions in here: https://github.com/cheslijones/wsl2-minikube
 
 After that,
