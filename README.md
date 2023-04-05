@@ -39,3 +39,6 @@ minikube start --vm-driver=docker
 skaffold dev
 ```
 
+
+_Notes: Recommended using WSL or another virtual machine_
+
